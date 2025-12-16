@@ -17,7 +17,6 @@
 <body>
 
     <?php
-
     session_start();
 
     // Definir los roles que SÍ tienen acceso

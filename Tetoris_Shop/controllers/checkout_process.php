@@ -36,7 +36,7 @@ $conn->begin_transaction();
 
 try {
     // 1. Crear Venta
-    $id_usuario = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : NULL;
+    $id_usuario = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
     $stmt = $conn->prepare("INSERT INTO ventas (id_usuario, total_venta, metodo_pago) VALUES (?, ?, 'Web')");
     $stmt->bind_param("id", $id_usuario, $total);
     $stmt->execute();

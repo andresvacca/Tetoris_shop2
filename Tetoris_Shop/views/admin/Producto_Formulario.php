@@ -78,7 +78,7 @@ $cats = $conn->query("SELECT * FROM categorias");
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Precio Venta ($)</label>
                     <input type="number" step="0.01" class="form-control" name="precio_venta" 
-                           value="<?php echo htmlspecialchars($p_venta); ?>" required>
+                           value="<?php echo htmlspecialchars($p_venta); ?>"required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Costo Compra ($)</label>

@@ -36,32 +36,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // REDIRECCIÓN SEGÚN ROL
             switch (strtoupper($usuario['nombre_rol'])) { 
                 case 'ADMINISTRADOR':
-                    header("Location: Dashboard.php"); 
+                    header("Location: ../views/admin/Dashboard.php"); 
                     break;
                 case 'EMPLEADO':
-                    header("Location: Productos.php"); 
+                    header("Location: ../views/admin/Productos.php"); 
                     break;
                 case 'CLIENTE':
                 default:
-                    header("Location: ProductosUsuario.php"); 
+                    header("Location: ../views/client/ProductosUsuario.php"); 
                     break;
             }
             exit();
             
         } else {
             $_SESSION['login_error'] = "Contraseña incorrecta.";
-            header("Location: forms/Login.php");
+            header("Location: ../views/auth/Login.php");
             exit();
         }
     } else {
         $_SESSION['login_error'] = "El correo no existe.";
-        header("Location: forms/Login.php");
+        header("Location: ../views/auth/Login.php");
         exit();
     }
     
     $stmt->close();
 } else {
-    header("Location: forms/Login.php");
+    header("Location: ../views/auth/Login.php");
     exit();
 }
 $conn->close();

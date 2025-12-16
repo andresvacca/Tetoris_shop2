@@ -10,7 +10,7 @@ require_once 'db_connection.php';
 $allowed_roles = ['ADMINISTRADOR', 'EMPLEADO'];
 if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], $allowed_roles)) {
     // Si no tiene permiso, lo mandamos al login
-    header("Location: forms/Login.php");
+    header("Location: ../auth/Login.php");
     exit();
 }
 
@@ -35,7 +35,7 @@ $fecha_fin_sql = $fecha_fin . ' 23:59:59';
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous">
         
-    <link rel="stylesheet" href="css/inventario.css"> 
+    <link rel="stylesheet" href="../../css/inventario.css"> 
 </head>
 <body>
 

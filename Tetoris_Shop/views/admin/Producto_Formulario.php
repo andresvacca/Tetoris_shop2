@@ -50,7 +50,7 @@ $cats = $conn->query("SELECT * FROM categorias");
         
         <form action="../../controllers/process_product.php" method="POST">
             <input type="hidden" name="action" value="<?php echo $is_editing ? 'update' : 'create'; ?>">
-            <?php if ($is_editing): ?>
+            <?php if ($is_editing):?>
                 <input type="hidden" name="id_producto" value="<?php echo htmlspecialchars($producto_id); ?>">
             <?php endif; ?>
 

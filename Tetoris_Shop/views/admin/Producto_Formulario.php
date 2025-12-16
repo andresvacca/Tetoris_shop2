@@ -1,10 +1,10 @@
 <?php
-require_once 'db_connection.php'; 
+require_once '../../config/db_connection.php'; 
 session_start();
 
 // Verificación de seguridad (Solo admin/empleado)
 if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['ADMINISTRADOR', 'EMPLEADO'])) {
-    header("Location: Login.php");
+    header("Location: ../auth/Login.php");
     exit();
 }
 
@@ -39,33 +39,35 @@ $cats = $conn->query("SELECT * FROM categorias");
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $form_title; ?> - Teto</title> 
+    <title><?php echo htmlspecialchars($form_title); ?> - Teto</title> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/inventario.css">
+    <link rel="stylesheet" href="../../assets/css/inventario.css">
 </head>
 <body>
 <div class="container mt-5">
     <div class="teto-card p-4 border rounded shadow mx-auto" style="max-width: 800px;">
-        <h2 class="mb-4 text-center"><?php echo $form_title; ?></h2>
+        <h2 class="mb-4 text-center"><?php echo htmlspecialchars($form_title); ?></h2>
         
-        <form action="process_product.php" method="POST">
+        <form action="../../controllers/process_product.php" method="POST">
             <input type="hidden" name="action" value="<?php echo $is_editing ? 'update' : 'create'; ?>">
             <?php if ($is_editing): ?>
-                <input type="hidden" name="id_producto" value="<?php echo $producto_id; ?>">
+                <input type="hidden" name="id_producto" value="<?php echo htmlspecialchars($producto_id); ?>">
             <?php endif; ?>
 
             <div class="row">
                 <div class="col-md-8 mb-3">
                     <label class="form-label">Nombre del Producto</label>
-                    <input type="text" class="form-control" name="nombre_producto" value="<?php echo htmlspecialchars($nombre); ?>" required>
+                    <input type="text" class="form-control" name="nombre_producto" 
+                           value="<?php echo htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8'); ?>" required>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label">Categoría</label>
                     <select class="form-select" name="id_categoria" required>
                         <option value="">Seleccionar...</option>
                         <?php while($c = $cats->fetch_assoc()): ?>
-                            <option value="<?php echo $c['id_categoria']; ?>" <?php echo ($c['id_categoria'] == $id_cat) ? 'selected' : ''; ?>>
-                                <?php echo $c['nombre_categoria']; ?>
+                            <option value="<?php echo htmlspecialchars($c['id_categoria']); ?>" 
+                                <?php echo ($c['id_categoria'] == $id_cat) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($c['nombre_categoria']); ?>
                             </option>
                         <?php endwhile; ?>
                     </select>
@@ -75,27 +77,31 @@ $cats = $conn->query("SELECT * FROM categorias");
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Precio Venta ($)</label>
-                    <input type="number" step="0.01" class="form-control" name="precio_venta" value="<?php echo htmlspecialchars($p_venta); ?>" required>
+                    <input type="number" step="0.01" class="form-control" name="precio_venta" 
+                           value="<?php echo htmlspecialchars($p_venta); ?>" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Costo Compra ($)</label>
-                    <input type="number" step="0.01" class="form-control" name="costo_compra" value="<?php echo htmlspecialchars($p_compra); ?>" required>
+                    <input type="number" step="0.01" class="form-control" name="costo_compra" 
+                           value="<?php echo htmlspecialchars($p_compra); ?>" required>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Stock Actual</label>
-                    <input type="number" class="form-control" name="stock_actual" value="<?php echo htmlspecialchars($stock); ?>" required>
+                    <input type="number" class="form-control" name="stock_actual" 
+                           value="<?php echo htmlspecialchars($stock); ?>" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Stock Mínimo (Alerta)</label>
-                    <input type="number" class="form-control" name="stock_minimo" value="<?php echo htmlspecialchars($min_stock); ?>" required>
+                    <input type="number" class="form-control" name="stock_minimo" 
+                           value="<?php echo htmlspecialchars($min_stock); ?>" required>
                 </div>
             </div>
             
             <div class="d-grid gap-2 mt-4">
-                <button type="submit" class="btn teto-btn-secondary btn-lg"><?php echo $submit_label; ?></button>
+                <button type="submit" class="btn teto-btn-secondary btn-lg"><?php echo htmlspecialchars($submit_label); ?></button>
                 <a href="Productos.php" class="btn btn-outline-secondary">Cancelar</a>
             </div>
         </form>

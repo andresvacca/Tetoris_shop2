@@ -1,7 +1,7 @@
 <?php
 session_start();
 /**
- * process_product.php
+ * Process_product.php
  * Script centralizado para manejar las operaciones CRUD (Crear, Modificar, Eliminar)
  * CORREGIDO para la estructura de la BD de Tetoris Shop.
  */
